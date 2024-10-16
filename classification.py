@@ -1,8 +1,11 @@
 import pandas as pd
-import numpy as np 
+import numpy as np
+import matplotlib.pyplot as plt 
+import seaborn as sns 
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 from sklearn.model_selection import train_test_split
 import pickle as pkl
+import os
 
 
 def read_data(file_path):
@@ -15,8 +18,15 @@ def split_data(X, y):
 
 
 def visualizations(train):
-    pass
+    directory_name = "plots"
+    if not os.path.exists(directory_name):
+        os.mkdir(directory_name)
+    os.chdir(directory_name)
+    #plot
 
+    os.chdir("..")
+    
+    
 class DataPreprocessing:
     def __init__(self, X, y):
         self.X_train, self.X_val, self.Y_train, self.Y_val = split_data(X, y)
@@ -25,8 +35,13 @@ class DataPreprocessing:
         print(" \nVal shape: ", self.X_val.shape, self.Y_val.shape)
         #target columns needs encoding
         
-    def label_encoding(self, X_train, Y_train):
-        pass
+    def save_objects(self, object):
+        pass 
+    
+    def label_encoding(self, X_train, X_val):
+        label_encoder = LabelEncoder()
+        
+        
     
     def procesing(self, X_train, X_val):
         pass
@@ -40,6 +55,7 @@ if __name__=='__main__':
     X = data.drop(['target'], axis=1)
     # Data preprocessing
     obj = DataPreprocessing(X, y)
+    visualizations(data)
 
     
 
