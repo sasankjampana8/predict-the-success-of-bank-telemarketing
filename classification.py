@@ -23,25 +23,31 @@ def visualizations(train):
         os.mkdir(directory_name)
     os.chdir(directory_name)
     #plot
-
+    
     os.chdir("..")
     
     
 class DataPreprocessing:
-    def __init__(self, X, y):
+    def __init__(self, X, y, artifacts_path):
         self.X_train, self.X_val, self.Y_train, self.Y_val = split_data(X, y)
+        self.artifacts_path = artifacts_path
         print("Train and Val shape: \n")
         print("Train shape: ", self.X_train.shape, self.Y_train.shape)
         print(" \nVal shape: ", self.X_val.shape, self.Y_val.shape)
         #target columns needs encoding
         
-    def save_objects(self, object):
-        pass 
-    
+    def save_objects(self, feature_name, obj):
+        with open(f"{self.artifacts_path}/{feature_name}_estimator", 'wb') as f:
+            pkl.dump(obj, f)
+        
     def label_encoding(self, X_train, X_val):
         label_encoder = LabelEncoder()
-        
-        
+        cols = []
+        cat_cols = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'poutcome', 'target']
+
+    def onehot_encoding(self, X_train, X_val):
+        onehot_encoder = OneHotEncoder()
+        cols = []
     
     def procesing(self, X_train, X_val):
         pass
